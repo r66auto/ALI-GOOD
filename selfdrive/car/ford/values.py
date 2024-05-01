@@ -90,9 +90,9 @@ class CAR(Platforms):
   ESCAPE_MK4_23 = FordPlatformConfig(
     "FORD ESCAPE 2023 REFRESH",
     [
-      FordCarInfo("Ford Escape 2023-24"),
-      FordCarInfo("Ford Escape Hybrid 2023-24"),
-      FordCarInfo("Ford Escape Plug-in Hybrid 2023-24"),
+      FordCarInfo("Ford Escape 2023-24", "Co-Pilot360 Assist 2.0"),
+      FordCarInfo("Ford Escape Hybrid 2023-24", "Co-Pilot360 Assist 2.0"),
+      FordCarInfo("Ford Escape Plug-in Hybrid 2023-24", "Co-Pilot360 Assist 2.0"),
       FordCarInfo("Ford Kuga 2023-24", "Co-Pilot360 Assist 2.0"),
       FordCarInfo("Ford Kuga Hybrid 2023-24", "Co-Pilot360 Assist 2.0"),
       FordCarInfo("Ford Kuga Plug-in Hybrid 2023-24", "Co-Pilot360 Assist 2.0"),
