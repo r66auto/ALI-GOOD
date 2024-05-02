@@ -9,21 +9,22 @@ from openpilot.system.loggerd.uploader import listdir_by_creation
 from tools.lib.route import SegmentName
 
 
-# path to sunnypilot screen recordings and error logs
+# path sunnypilot to "error logs", "login PIN" and "screen recordings"
 if PC:
-  SCREENRECORD_PATH = os.path.join(str(Path.home()), ".comma", "media", "0", "videos", "")
   ERROR_LOGS_PATH = os.path.join(str(Path.home()), ".comma", "community", "crashes", "")
   PIN_PATH = os.path.join(str(Path.home()), ".comma", "otp", "")
+  SCREENRECORD_PATH = os.path.join(str(Path.home()), ".comma", "media", "0", "videos", "")
 else:
-  SCREENRECORD_PATH = "/data/media/0/videos/"
   ERROR_LOGS_PATH = "/data/community/crashes/"
   PIN_PATH = "/data/otp/"
+  SCREENRECORD_PATH = "/data/media/0/videos/"
 
 
 def login_required(f):
   @wraps(f)
   def decorated_route(*args, **kwargs):
     if not session.get("logged_in"):
+    # if not session.get("logged_in") and False:
       session["previous_page"] = request.url
       return render_template("login.html")
     return f(*args, **kwargs)

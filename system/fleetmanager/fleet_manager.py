@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import os
+import os, shutil
 import random
 import secrets
 from flask import Flask, render_template, Response, request, send_from_directory, session, redirect, url_for
@@ -114,6 +114,13 @@ def download_file(clip):
   return send_from_directory(fleet.SCREENRECORD_PATH, clip, as_attachment=True)
 
 
+@app.route("/screenrecords/delete/<clip>")
+@fleet.login_required
+def delete_file(clip):
+  os.remove(fleet.SCREENRECORD_PATH + clip)
+  return redirect("/screenrecords")
+
+
 @app.route("/about")
 def about():
   return render_template("about.html")
@@ -131,6 +138,11 @@ def open_error_log(file_name):
   return render_template("error_log.html", file_name=file_name, file_content=error)
 
 
+@app.route("/deletescreenrecords")
+def delete_folder():
+  shutil.rmtree(fleet.SCREENRECORD_PATH, True)
+  return redirect("/screenrecords")
+
 def main():
   if not os.path.exists(fleet.PIN_PATH):
     os.makedirs(fleet.PIN_PATH)
@@ -138,6 +150,7 @@ def main():
   with open(fleet.PIN_PATH + "otp.conf", "w") as file:
     file.write(pin)
 
+  # print(f'\n\npin: {pin}\n\n')
   app.secret_key = secrets.token_hex(32)
   app.run(host="0.0.0.0", port=5050)
 
